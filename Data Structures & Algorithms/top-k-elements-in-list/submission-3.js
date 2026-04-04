@@ -1,0 +1,15 @@
+class Solution {
+    topKFrequent(nums, k) {
+        const count = {};
+        for (let val of nums) count[val] = (count[val] || 0) + 1;
+        const freq = Array.from({length: nums.length+1}, () => []);
+        for (const n in count) freq[count[n]].push(+n);
+        const res = [];
+        for (let i = freq.length - 1; i > 0; i--) {
+            for (const n of freq[i]) {
+                res.push(n);
+                if (res.length === k) return res;
+            }
+        }
+    }
+}
